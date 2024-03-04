@@ -1,0 +1,66 @@
+Description
+已有a、b两个链表，每个链表中的结点包括学号、成绩。要求把两个链表合并，按学号升序排列。（学生总数小于100）
+Input
+第一行，a、b两个链表元素的数量N、M,用空格隔开。 接下来N行是a的数据 然后M行是b的数据 每行数据由学号和成绩两部分组成
+Output
+按照学号升序排列的数据
+Sample Input
+2 3
+5 100
+6 89
+3 82
+4 95
+2 10
+Sample Output
+2 10
+3 82
+4 95
+5 100
+6 89
+
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<string.h>
+#include<errno.h>
+#include<stdlib.h>
+#include<math.h>
+#include<stdio.h>
+
+typedef struct Student
+{
+	int x;
+	int j;
+}S;
+
+int main()
+{
+	S c[101];
+	int m, n,i,tmp;
+	scanf("%d%d", &m, &n);
+	for (i = 0; i < m+n; i++)
+	{
+		scanf("%d%d", &c[i].x, &c[i].j);
+	}
+	for (i = 0; i < m + n; i++)
+	{
+		int j;
+		tmp = i;
+		for (j = i+1; j < m + n; j++)
+		{
+			if (c[tmp].x > c[j].x)
+			{
+				tmp = j;
+			}
+		}
+		c[100].x = c[i].x;
+		c[100].j = c[i].j;
+		c[i].x = c[tmp].x;
+		c[i].j = c[tmp].j;
+		c[tmp].x = c[100].x;
+		c[tmp].j = c[100].j;
+	}
+	for (i = 0; i < m + n; i++)
+	{
+		printf("%d %d\n", c[i].x, c[i].j);
+	}
+	return 0;
+}
